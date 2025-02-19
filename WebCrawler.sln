@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebCrawler.Domain", "WebCra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebCrawler.Application", "Application\WebCrawler.Application.csproj", "{8F14D91D-FFD8-4415-B938-065DBDF80D20}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebCrawler.Infrastructure", "WebCrawler.Infrastructure\WebCrawler.Infrastructure.csproj", "{86B72345-FDA3-475A-83A8-EBAF2C78609C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,18 @@ Global
 		{8F14D91D-FFD8-4415-B938-065DBDF80D20}.Release|x64.Build.0 = Release|Any CPU
 		{8F14D91D-FFD8-4415-B938-065DBDF80D20}.Release|x86.ActiveCfg = Release|Any CPU
 		{8F14D91D-FFD8-4415-B938-065DBDF80D20}.Release|x86.Build.0 = Release|Any CPU
+		{86B72345-FDA3-475A-83A8-EBAF2C78609C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86B72345-FDA3-475A-83A8-EBAF2C78609C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86B72345-FDA3-475A-83A8-EBAF2C78609C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{86B72345-FDA3-475A-83A8-EBAF2C78609C}.Debug|x64.Build.0 = Debug|Any CPU
+		{86B72345-FDA3-475A-83A8-EBAF2C78609C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{86B72345-FDA3-475A-83A8-EBAF2C78609C}.Debug|x86.Build.0 = Debug|Any CPU
+		{86B72345-FDA3-475A-83A8-EBAF2C78609C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86B72345-FDA3-475A-83A8-EBAF2C78609C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86B72345-FDA3-475A-83A8-EBAF2C78609C}.Release|x64.ActiveCfg = Release|Any CPU
+		{86B72345-FDA3-475A-83A8-EBAF2C78609C}.Release|x64.Build.0 = Release|Any CPU
+		{86B72345-FDA3-475A-83A8-EBAF2C78609C}.Release|x86.ActiveCfg = Release|Any CPU
+		{86B72345-FDA3-475A-83A8-EBAF2C78609C}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
