@@ -1,4 +1,6 @@
-﻿
+﻿using System;
+using HtmlAgilityPack;
+using System.Collections.Generic;
 using WebCrawler.Models;
 
 namespace WebCrawler.Services
@@ -15,6 +17,7 @@ namespace WebCrawler.Services
 
         public async Task<List<ProxyInfo>> ExtractProxiesFromPageAsync(string url)
         {
+            
             // 1. Baixar conteúdo HTML
             var html = await GetHtmlContentAsync(url);
 
@@ -25,6 +28,7 @@ namespace WebCrawler.Services
         {
             var response = await _httpClient.GetAsync(url);
             response.EnsureSuccessStatusCode();
+
             return await response.Content.ReadAsStringAsync();
         }
 
