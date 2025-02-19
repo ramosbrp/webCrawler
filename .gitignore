@@ -1,0 +1,26 @@
+## .NET Core
+bin/
+obj/
+*.user
+*.suo
+*.userprefs
+
+## Build results
+[Dd]ebug/
+
+## IDEs (Visual Studio, VS Code, etc.)
+.vs/
+.vscode/
+*.rider/
+.idea/
+
+## OS
+.DS_Store
+Thumbs.db
+
+# NuGet
+packages/
+*.mdf
+*.ldf
+/backend/appsettings.json
+/git-filter-repo
