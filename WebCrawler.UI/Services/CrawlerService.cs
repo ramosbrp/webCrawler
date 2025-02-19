@@ -1,5 +1,5 @@
 ﻿using HtmlAgilityPack;
-using WebCrawler.Models;
+using WebCrawler.Domain.Models;
 
 namespace WebCrawler.Services
 {

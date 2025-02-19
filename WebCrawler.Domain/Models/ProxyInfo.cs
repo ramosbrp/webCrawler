@@ -1,4 +1,4 @@
-﻿namespace WebCrawler.Models
+﻿namespace WebCrawler.Domain.Models
 {
     public class ProxyInfo(string ipAddress, string? port, string country, string protocol)
     {
