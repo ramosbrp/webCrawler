@@ -1,6 +1,4 @@
-﻿using System;
-using HtmlAgilityPack;
-using System.Collections.Generic;
+﻿using HtmlAgilityPack;
 using WebCrawler.Models;
 
 namespace WebCrawler.Services
@@ -59,6 +57,45 @@ namespace WebCrawler.Services
             }
 
             return proxies;
+        }
+
+
+        public async Task<List<ProxyInfo>> RunAsync()
+        {
+            try
+            {
+                var allProxies = new List<ProxyInfo>();
+                var pageNumber = 1;
+                bool hasMorePages = true;
+
+                while (hasMorePages)
+                {
+                    var url = $"https://proxyservers.pro/proxy/list/order/updated/order_dir/desc/page/{pageNumber}";
+                    Console.WriteLine($"Processando URL: {url}");
+
+                    // Tenta extrair
+                    var proxies = await ExtractProxiesFromPageAsync(url);
+
+                    if (proxies.Count != 0)
+                    {
+                        allProxies.AddRange(proxies);
+                        pageNumber++;
+                    }
+                    else
+                    {
+                        // Se não retornou nada, pode indicar que chegamos ao fim
+                        hasMorePages = false;
+                    }
+                }
+
+                return allProxies;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
 
         private async Task<HtmlNodeCollection> GetHtmlContentAsync(string url)
