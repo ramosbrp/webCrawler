@@ -1,7 +1,9 @@
-﻿namespace WebCrawler.Domain.Ports
+﻿using WebCrawler.Domain.Models;
+
+namespace WebCrawler.Domain.Ports
 {
     public interface IProxyRepository
     {
-        Task<int> SaveExecutionAsync();
+        Task<int> SaveExecutionAsync(CrawlerExecution execution);
     }
 }

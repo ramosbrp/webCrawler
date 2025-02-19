@@ -4,7 +4,7 @@ namespace WebCrawler.Application
 {
     public interface ICrawlerService
     {
-        Task<List<ProxyInfo>> RunAsync();
+        Task<List<ProxyInfo>> RunCrawlerAsync();
     }
 
 }
