@@ -24,7 +24,6 @@ var host = Host.CreateDefaultBuilder(args)
     .Build();
 
 
-// Recupera CrawlerService do DI
 var crawlerService = host.Services.GetRequiredService<ICrawlerService>();
 var exporter = host.Services.GetRequiredService<IProxyFileExporter>();
 var repo = host.Services.GetRequiredService<IProxyRepository>();
