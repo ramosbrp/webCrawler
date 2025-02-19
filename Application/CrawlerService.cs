@@ -1,9 +1,9 @@
 ﻿using HtmlAgilityPack;
 using WebCrawler.Domain.Models;
 
-namespace WebCrawler.Services
+namespace WebCrawler.Application
 {
-    public class CrawlerService
+    public class CrawlerService : ICrawlerService
     {
 
         private readonly HttpClient _httpClient;
@@ -11,6 +11,44 @@ namespace WebCrawler.Services
         public CrawlerService(HttpClient httpClient)
         {
             _httpClient = httpClient;
+        }
+
+        public async Task<List<ProxyInfo>> RunAsync()
+        {
+            try
+            {
+                var allProxies = new List<ProxyInfo>();
+                var pageNumber = 1;
+                bool hasMorePages = true;
+
+                while (hasMorePages)
+                {
+                    var url = $"https://proxyservers.pro/proxy/list/order/updated/order_dir/desc/page/{pageNumber}";
+                    Console.WriteLine($"Processando URL: {url}");
+
+                    // Tenta extrair
+                    var proxies = await ExtractProxiesFromPageAsync(url);
+
+                    if (proxies.Count != 0)
+                    {
+                        allProxies.AddRange(proxies);
+                        pageNumber++;
+                    }
+                    else
+                    {
+                        // Se não retornou nada, pode indicar que chegamos ao fim
+                        hasMorePages = false;
+                    }
+                }
+
+                return allProxies;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
 
         public async Task<List<ProxyInfo>> ExtractProxiesFromPageAsync(string url)
@@ -60,43 +98,7 @@ namespace WebCrawler.Services
         }
 
 
-        public async Task<List<ProxyInfo>> RunAsync()
-        {
-            try
-            {
-                var allProxies = new List<ProxyInfo>();
-                var pageNumber = 1;
-                bool hasMorePages = true;
 
-                while (hasMorePages)
-                {
-                    var url = $"https://proxyservers.pro/proxy/list/order/updated/order_dir/desc/page/{pageNumber}";
-                    Console.WriteLine($"Processando URL: {url}");
-
-                    // Tenta extrair
-                    var proxies = await ExtractProxiesFromPageAsync(url);
-
-                    if (proxies.Count != 0)
-                    {
-                        allProxies.AddRange(proxies);
-                        pageNumber++;
-                    }
-                    else
-                    {
-                        // Se não retornou nada, pode indicar que chegamos ao fim
-                        hasMorePages = false;
-                    }
-                }
-
-                return allProxies;
-
-            }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
-        }
 
         private async Task<HtmlNodeCollection> GetHtmlContentAsync(string url)
         {

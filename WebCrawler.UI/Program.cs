@@ -1,4 +1,4 @@
-﻿using WebCrawler.Services;
+﻿using WebCrawler.Application;
 
 // 1. Criar HttpClient
 var httpClient = new HttpClient();
