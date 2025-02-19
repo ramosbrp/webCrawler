@@ -18,12 +18,7 @@ namespace WebCrawler.Services
         public async Task<List<ProxyInfo>> ExtractProxiesFromPageAsync(string url)
         {
 
-
-            HtmlWeb web = new HtmlWeb();
-
-            var htmlDoc = web.Load(url);
-
-            var rowNodes = htmlDoc.DocumentNode.SelectNodes("//tbody/tr");
+            var rowNodes = await GetHtmlContentAsync(url);
 
             // Se não encontrou rows, devolve lista vazia
             if (rowNodes == null)
@@ -66,12 +61,12 @@ namespace WebCrawler.Services
             return proxies;
         }
 
-        private async Task<string> GetHtmlContentAsync(string url)
+        private async Task<HtmlNodeCollection> GetHtmlContentAsync(string url)
         {
-            var response = await _httpClient.GetAsync(url);
-            response.EnsureSuccessStatusCode();
-
-            return await response.Content.ReadAsStringAsync();
+            HtmlWeb web = new HtmlWeb();
+            var htmlDoc = await Task.Run(() => web.Load(url));
+            var rowNodes = htmlDoc.DocumentNode.SelectNodes("//tbody/tr");
+            return rowNodes;
         }
 
     }
