@@ -2,10 +2,6 @@
 using WebCrawler.Domain.Models;
 using WebCrawler.Domain.Ports;
 using WebCrawler.Application;
-using WebCrawler.Application.DTOs;
-using Xunit;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 
 namespace WebCrawler.Tests
