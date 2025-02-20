@@ -36,6 +36,7 @@ var host = Host.CreateDefaultBuilder(args)
         services.AddTransient<ICrawlerService, CrawlerService>();
         services.AddTransient<IProxyFileExporter, JsonProxyFileExporter>();
         services.AddTransient<IProxyParser, HtmlAgilityProxyParser>();
+        services.AddTransient<IPagePrinter, FilePagePrinter>();
         services.AddTransient<IProxyRepository, SqlProxyRepository>();
 
     })

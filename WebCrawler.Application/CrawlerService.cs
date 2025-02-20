@@ -9,15 +9,18 @@ namespace WebCrawler.Application
     {
         private readonly IHtmlDownloader _htmlDownloader;
         private readonly IProxyParser _proxyParser;
+        private readonly IPagePrinter _pagePrinter;
         private readonly ILogger<CrawlerService> _logger;
 
         public CrawlerService(
             IHtmlDownloader htmlDownloader,
             IProxyParser proxyParser,
+            IPagePrinter pagePrinter,
             ILogger<CrawlerService> logger)
         {
             _htmlDownloader = htmlDownloader;
             _proxyParser = proxyParser;
+            _pagePrinter = pagePrinter;
             _logger = logger;
         }
 
@@ -35,12 +38,14 @@ namespace WebCrawler.Application
                     var url = $"https://proxyservers.pro/proxy/list/order/updated/order_dir/desc/page/{pageNumber}";
                     Console.WriteLine($"Processando URL: {url}");
 
-                    // 1. Tenta extrair
+                    // 1. Baixar HTML
                     var html = await _htmlDownloader.GetHtmlContentAsync(url);
 
-                    // 2. Faz parse dos proxies
-                    var proxies = _proxyParser.ParseTeste(html);
-                    //var proxies = _proxyParser.ParseProxies(html);
+                    // 2. Salvar (print) em arquivo
+                    await _pagePrinter.PrintPageAsync(html, pageNumber);
+
+                    // 3. Parsear proxies
+                    var proxies = _proxyParser.ParseProxies(html);
 
                     if (proxies.Count != 0)
                     {
