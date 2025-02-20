@@ -1,11 +1,7 @@
 ﻿using Moq;
 using WebCrawler.Application;
-using WebCrawler.Application.DTOs;
 using WebCrawler.Domain.Ports;
 using WebCrawler.Domain.Models;
-using Xunit;
-using System.Threading.Tasks;
-using System.Collections.Generic;
 using Microsoft.Extensions.Logging;
 
 namespace WebCrawler.Tests
