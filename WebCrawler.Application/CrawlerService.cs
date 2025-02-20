@@ -1,4 +1,5 @@
-﻿using WebCrawler.Domain.Models;
+﻿using WebCrawler.Application.DTOs;
+using WebCrawler.Domain.Models;
 using WebCrawler.Domain.Ports;
 
 namespace WebCrawler.Application
@@ -14,13 +15,14 @@ namespace WebCrawler.Application
             _proxyParser = proxyParser;
         }
 
-        public async Task<List<ProxyInfo>> RunCrawlerAsync()
+        public async Task<CrawlerRunResult> RunCrawlerAsync()
         {
             try
             {
                 var allProxies = new List<ProxyInfo>();
                 var pageNumber = 1;
                 bool hasMorePages = true;
+                int pagesProcessed = 0;
 
                 while (hasMorePages)
                 {
@@ -38,6 +40,7 @@ namespace WebCrawler.Application
                     {
                         allProxies.AddRange(proxies);
                         pageNumber++;
+                        pagesProcessed++;
                     }
                     else
                     {
@@ -46,7 +49,7 @@ namespace WebCrawler.Application
                     }
                 }
 
-                return allProxies;
+                return new CrawlerRunResult(allProxies, pagesProcessed);
 
             }
             catch (Exception ex)

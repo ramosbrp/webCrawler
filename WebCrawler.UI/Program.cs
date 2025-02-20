@@ -14,6 +14,18 @@ using WebCrawler.Infrastructure.Persistence;
 var host = Host.CreateDefaultBuilder(args)
     .ConfigureServices((context, services) =>
     {
+        // Lê a connection string do appsettings.json
+        var connectionString = context.Configuration.GetConnectionString("DefaultConnection");
+
+        if (string.IsNullOrEmpty(connectionString))
+        {
+            throw new InvalidOperationException("A string de conexão não foi carregada. Verifique o appsettings.json.");
+        }
+
+        // Adiciona DbContext
+        services.AddDbContext<CrawlerDbContext>(options =>
+            options.UseSqlServer(connectionString));
+
         // Adicionar implementações concretas para interfaces
         services.AddTransient<IHtmlDownloader, HtmlAgilityDownloader>();
         services.AddTransient<ICrawlerService, CrawlerService>();
@@ -21,16 +33,8 @@ var host = Host.CreateDefaultBuilder(args)
         services.AddTransient<IProxyParser, HtmlAgilityProxyParser>();
         services.AddTransient<IProxyRepository, SqlProxyRepository>();
 
-        // Lê a connection string do appsettings.json
-        var connectionString = context.Configuration.GetConnectionString("DefaultConnection");
-
-        // Registra CrawlerDbContext com EF e SQL Server
-        services.AddDbContext<CrawlerDbContext>(options =>
-            options.UseSqlServer(connectionString));
-
     })
     .Build();
-
 
 var crawlerService = host.Services.GetRequiredService<ICrawlerService>();
 var exporter = host.Services.GetRequiredService<IProxyFileExporter>();
@@ -43,7 +47,9 @@ Console.WriteLine($"Iniciando crawler em {startTime}");
 
 // Executa
 Console.WriteLine($"Obtendo proxies - {DateTime.Now}");
-var proxies = await crawlerService.RunCrawlerAsync();
+var crawlerResult = await crawlerService.RunCrawlerAsync();
+var proxies = crawlerResult.Proxies;
+var pagesCount = crawlerResult.PagesCount;
 
 // Salva em JSON
 Console.WriteLine($"Salvando proxies obtidos em Json - {DateTime.Now}");
@@ -56,7 +62,7 @@ var exec = new WebCrawler.Domain.Models.CrawlerExecution
 {
     StartTime = startTime,
     EndTime = endTime,
-    PagesCount = 1, // Ajustar para a contagem real 
+    PagesCount = pagesCount, // Ajustar para a contagem real 
     TotalRecords = proxies.Count,
     JsonFilePath = filePath
 };
