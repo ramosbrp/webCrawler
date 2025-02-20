@@ -49,11 +49,9 @@ try
     var repo = host.Services.GetRequiredService<IProxyRepository>();
 
 
-    // Início da execução
+    // Início da execução do Crawler
     var startTime = DateTime.Now;
     Console.WriteLine($"Iniciando crawler em {startTime}");
-
-    // Executa
     var crawlerResult = await crawlerService.RunCrawlerAsync();
     var proxies = crawlerResult.Proxies;
     var pagesCount = crawlerResult.PagesCount;
