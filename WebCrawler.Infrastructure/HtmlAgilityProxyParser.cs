@@ -43,5 +43,21 @@ namespace WebCrawler.Infrastructure
 
             return proxies;
         }
+
+        public List<ProxyInfo> ParseTeste(string html)
+        {
+            var doc = new HtmlDocument();
+            doc.LoadHtml(html);
+
+            // Seleciona os <tr> conforme o site
+            var node = doc.DocumentNode.SelectSingleNode("//h1");
+            if (node == null)
+                return new List<ProxyInfo>();
+
+            var proxies = new List<ProxyInfo>();
+
+            
+            return proxies;
+        }
     }
 }

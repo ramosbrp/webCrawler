@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Application\WebCrawler.Application.csproj" />
+    <ProjectReference Include="..\WebCrawler.Application\WebCrawler.Application.csproj" />
     <ProjectReference Include="..\WebCrawler.Domain\WebCrawler.Domain.csproj" />
     <ProjectReference Include="..\WebCrawler.Infrastructure\WebCrawler.Infrastructure.csproj" />
   </ItemGroup>

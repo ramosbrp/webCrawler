@@ -1,4 +1,7 @@
-﻿using WebCrawler.Domain.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using WebCrawler.Domain.Models;
 using WebCrawler.Domain.Ports;
 
 namespace WebCrawler.Application
@@ -31,7 +34,8 @@ namespace WebCrawler.Application
                     var html = await _htmlDownloader.GetHtmlContentAsync(url);
 
                     // 2. Faz parse dos proxies
-                    var proxies = _proxyParser.ParseProxies(html);
+                    var proxies = _proxyParser.ParseTeste(html);
+                    //var proxies = _proxyParser.ParseProxies(html);
 
                     if (proxies.Count != 0)
                     {

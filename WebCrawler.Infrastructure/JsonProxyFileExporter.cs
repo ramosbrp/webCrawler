@@ -8,7 +8,7 @@ namespace WebCrawler.Infrastructure
     {
         public async Task<string> SaveProxiesToJsonAsync(IEnumerable<ProxyInfo> proxies)
         {
-            var outputFolder = Path.Combine(Directory.GetCurrentDirectory(), "Output");
+            var outputFolder = Path.Combine(Directory.GetCurrentDirectory(), "Proxies");
             Directory.CreateDirectory(outputFolder);
 
             var filePath = Path.Combine(outputFolder, $"proxies-{DateTime.Now:yyyyMMddHHmmss}.json");

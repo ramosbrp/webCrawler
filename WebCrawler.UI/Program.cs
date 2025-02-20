@@ -15,6 +15,7 @@ var host = Host.CreateDefaultBuilder(args)
         services.AddTransient<IHtmlDownloader, HtmlAgilityDownloader>();
         services.AddTransient<ICrawlerService, CrawlerService>();
         services.AddTransient<IProxyFileExporter, JsonProxyFileExporter>();
+        services.AddTransient<IProxyParser, HtmlAgilityProxyParser>();
 
         // Precisamos passar a connection string do config:
         var connectionString = "Server=...;Database=...;User Id=...;Password=...";
@@ -34,9 +35,11 @@ var startTime = DateTime.Now;
 Console.WriteLine($"Iniciando crawler em {startTime}");
 
 // Executa
+Console.WriteLine($"Obtendo proxies - {DateTime.Now}");
 var proxies = await crawlerService.RunCrawlerAsync();
 
 // Salva em JSON
+Console.WriteLine($"Salvando proxies obtidos em Json - {DateTime.Now}");
 var filePath = await exporter.SaveProxiesToJsonAsync(proxies);
 
 var endTime = DateTime.Now;
@@ -51,6 +54,7 @@ var exec = new WebCrawler.Domain.Models.CrawlerExecution
     JsonFilePath = filePath
 };
 
+Console.WriteLine($"Salvando log da execução no banco de dados - {DateTime.Now}");
 var newId = await repo.SaveExecutionAsync(exec);
 
 Console.WriteLine($"Execução finalizada. {proxies.Count} proxies extraídos. Exec ID: {newId}");
