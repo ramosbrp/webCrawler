@@ -1,8 +1,11 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WebCrawler.Application;
 using WebCrawler.Domain.Ports;
 using WebCrawler.Infrastructure;
+using WebCrawler.Infrastructure.Persistence;
 
 
 
@@ -17,10 +20,13 @@ var host = Host.CreateDefaultBuilder(args)
         services.AddTransient<IProxyFileExporter, JsonProxyFileExporter>();
         services.AddTransient<IProxyParser, HtmlAgilityProxyParser>();
 
-        // Precisamos passar a connection string do config:
-        var connectionString = "Server=...;Database=...;User Id=...;Password=...";
-        services.AddTransient<IProxyRepository>(provider =>
-            new SqlProxyRepository(connectionString));
+        // Lê a connection string do appsettings.json
+        var connectionString = context.Configuration.GetConnectionString("DefaultConnection");
+
+        // Registra CrawlerDbContext com EF e SQL Server
+        services.AddDbContext<CrawlerDbContext>(options =>
+            options.UseSqlServer(connectionString));
+
     })
     .Build();
 

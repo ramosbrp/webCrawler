@@ -30,11 +30,11 @@ namespace WebCrawler.Infrastructure.Persistence
                 entity.HasKey(e => e.Id);
             });
 
-            //modelBuilder.Entity<ProxyInfo>(entity =>
-            //{
-            //    entity.ToTable("Proxies");
-            //    entity.HasKey(p => p.Id);
-            //});
+            modelBuilder.Entity<ProxyInfo>(entity =>
+            {
+                entity.ToTable("Proxies");
+                entity.HasNoKey();
+            });
         }
     }
 }
