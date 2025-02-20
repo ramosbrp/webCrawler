@@ -1,6 +1,7 @@
 ﻿using WebCrawler.Application.DTOs;
 using WebCrawler.Domain.Models;
 using WebCrawler.Domain.Ports;
+using Microsoft.Extensions.Logging;
 
 namespace WebCrawler.Application
 {
@@ -8,11 +9,16 @@ namespace WebCrawler.Application
     {
         private readonly IHtmlDownloader _htmlDownloader;
         private readonly IProxyParser _proxyParser;
+        private readonly ILogger<CrawlerService> _logger;
 
-        public CrawlerService(IHtmlDownloader htmlDownloader, IProxyParser proxyParser)
+        public CrawlerService(
+            IHtmlDownloader htmlDownloader,
+            IProxyParser proxyParser,
+            ILogger<CrawlerService> logger)
         {
             _htmlDownloader = htmlDownloader;
             _proxyParser = proxyParser;
+            _logger = logger;
         }
 
         public async Task<CrawlerRunResult> RunCrawlerAsync()
@@ -54,11 +60,9 @@ namespace WebCrawler.Application
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                _logger.LogError(ex, "Erro durante RunCrawlerAsync no pageNumber X");
+                throw;
             }
         }
-
-
     }
 }
