@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using WebCrawler.Domain.Models;
+﻿using WebCrawler.Domain.Models;
 using WebCrawler.Domain.Ports;
 
 namespace WebCrawler.Application

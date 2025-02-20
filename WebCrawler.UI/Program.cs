@@ -19,6 +19,7 @@ var host = Host.CreateDefaultBuilder(args)
         services.AddTransient<ICrawlerService, CrawlerService>();
         services.AddTransient<IProxyFileExporter, JsonProxyFileExporter>();
         services.AddTransient<IProxyParser, HtmlAgilityProxyParser>();
+        services.AddTransient<IProxyRepository, SqlProxyRepository>();
 
         // Lê a connection string do appsettings.json
         var connectionString = context.Configuration.GetConnectionString("DefaultConnection");
