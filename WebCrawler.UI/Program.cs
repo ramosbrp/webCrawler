@@ -54,7 +54,6 @@ try
     Console.WriteLine($"Iniciando crawler em {startTime}");
 
     // Executa
-    Console.WriteLine($"Obtendo proxies - {DateTime.Now}");
     var crawlerResult = await crawlerService.RunCrawlerAsync();
     var proxies = crawlerResult.Proxies;
     var pagesCount = crawlerResult.PagesCount;
@@ -70,7 +69,7 @@ try
     {
         StartTime = startTime,
         EndTime = endTime,
-        PagesCount = pagesCount, // Ajustar para a contagem real 
+        PagesCount = pagesCount,
         TotalRecords = proxies.Count,
         JsonFilePath = filePath
     };
@@ -87,6 +86,6 @@ catch (Exception ex)
     Console.WriteLine($"ERRO FATAL: {ex.Message}");
     Console.ResetColor();
 
-    // Se quiser encerrar a aplicação com código de erro:
+    // Encerrar a aplicação com código de erro:
     Environment.Exit(-1);
 }
