@@ -13,14 +13,25 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.2" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Application\WebCrawler.Application.csproj" />
+    <ProjectReference Include="..\WebCrawler.Application\WebCrawler.Application.csproj" />
     <ProjectReference Include="..\WebCrawler.Domain\WebCrawler.Domain.csproj" />
     <ProjectReference Include="..\WebCrawler.Infrastructure\WebCrawler.Infrastructure.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+</ItemGroup>
+
 
 </Project>

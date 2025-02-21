@@ -1,10 +1,11 @@
-﻿using WebCrawler.Domain.Models;
+﻿using WebCrawler.Application.DTOs;
+using WebCrawler.Domain.Models;
 
 namespace WebCrawler.Application
 {
     public interface ICrawlerService
     {
-        Task<List<ProxyInfo>> RunCrawlerAsync();
+        Task<CrawlerRunResult> RunCrawlerAsync();
     }
 
 }
