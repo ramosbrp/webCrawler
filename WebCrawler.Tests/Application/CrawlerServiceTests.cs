@@ -35,7 +35,7 @@ namespace WebCrawler.Tests
                 .Setup(p => p.ParseProxies(It.IsAny<string>()))
                 .Returns((string html) =>
                 {
-                    // Supondo que você de alguma forma extrai pageNumber do HTML
+                    // Supondo que de alguma forma extrai pageNumber do HTML
                     // ou a URL (ex.: page/1) - mas aqui faremos algo simplificado:
                     // Vamos simular um contador estático ou algo do tipo
                     // MAS melhor extrair "pageNumber" do "html" se tiver um snippet.
@@ -44,10 +44,10 @@ namespace WebCrawler.Tests
                     // Se o seu Crawler a cada loop cria "<html>page1</html>" no downloader,
                     // você pode extrair a substring.
 
-                    // Para didático, assumimos que chamará em ordem 1,2,3,4.
+                    // Assumimos que chamará em ordem 1,2,3,4.
                     // Se for simultâneo, a ordem pode variar, mas iremos "drivar" por
                     // quantas vezes ParseProxies já foi chamada. Isso não reflete bem a
-                    // concurrency. De todo modo, segue exemplo "didático":
+                    // concurrency. De todo modo, segue exemplo:
 
                     int calls = _callCounter++;
                     switch (calls)
